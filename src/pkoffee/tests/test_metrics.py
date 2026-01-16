@@ -2,7 +2,6 @@
 import numpy as np
 import pytest
 
-from pkoffee.data import data_dtype
 from pkoffee.metrics import (
     SizeMismatchError,
     check_size_match,
