@@ -1,0 +1,35 @@
+name: Test
+
+on: [push]
+
+jobs:
+  code-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Setup Pixi
+        uses: prefix-dev/setup-pixi@v0.9.3
+        with:
+          pixi-version: v0.62.2
+          cache: true
+
+      - name: Code check
+        run: pixi run ruff check .
+
+  test:
+    runs-on: ubuntu-latest
+    needs: code-check
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Setup Pixi
+        uses: prefix-dev/setup-pixi@v0.9.3
+        with:
+          pixi-version: v0.62.2
+          cache: true
+
+      - name: Run tests
+        run: pixi run -e test-env test
