@@ -54,7 +54,7 @@ def test_compute_r2_negative():
     y_true = np.array([1.0, 2.0, 3.0, 4.0])
     y_pred = np.array([10.0, 10.0, 10.0, 10.0])  # very poor prediction
     r2 = compute_r2(y_true, y_pred)
-    assert r2 < pytest.approx(0.0)
+    assert r2 < 0.0
 
 def test_compute_r2_size_mismatch():
     """Test that compute_r2 raises SizeMismatchError for mismatched arrays."""
@@ -110,13 +110,6 @@ def test_compute_mae_perfect_prediction():
     mae = compute_mae(y_true, y_pred)
     assert mae == pytest.approx(0.0)
 
-def test_compute_mae_predicting_mean():
-    """Test that compute_mae returns 0.0 when predicting the mean."""
-    y_true = np.array([1.0, 2.0, 3.0, 4.0])
-    y_pred = np.array([2.5, 2.5, 2.5, 2.5])
-    mae = compute_mae(y_true, y_pred)
-    assert mae == pytest.approx(0.0)
-
 def test_compute_mae_negative_values():
     """Test compute_mae with negative values."""
     y_true = np.array([-1.0, -2.0, -3.0])
@@ -130,5 +123,5 @@ def test_compute_mae_size_mismatch():
     y_true = np.array([1.0, 2.0, 3.0])
     y_pred = np.array([1.0, 2.0])
     with pytest.raises(SizeMismatchError, match="Arrays must have same length"):
-        compute_mae(y_true, y_pred)
-    assert mae < pytest.approx(0.0)
+        mae = compute_mae(y_true, y_pred)
+        assert mae < 0.0
