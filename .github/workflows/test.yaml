@@ -18,5 +18,8 @@ jobs:
       - name: Install dependencies
         run: pixi install
 
+      - name: Code check
+        run: pixi run ruff check .
+
       - name: Run tests
         run: pixi run -e test-env test
